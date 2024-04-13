@@ -2,7 +2,7 @@
 
 ## 项目背景
 
-​		这个项目的主要背景是本人想给自己的Github主页润润色，四方索取，找到了该开源项目[anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats)，里面的Readme写的很详细，但是中文显然不够完整且很难get到每个功能的完善度，因此创建此项目。
+​		这个项目的主要背景是本人想给自己的Github主页润润色，找了一些开源项目，找到了该开源项目[anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats)，里面的Readme写的很详细，但是中文显然不够完整且很难get到每个功能的完善度，因此创建此项目。
 
 ## 项目实现方案
 
