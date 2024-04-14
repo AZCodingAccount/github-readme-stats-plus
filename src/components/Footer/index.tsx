@@ -10,24 +10,13 @@ const Footer: React.FC = () => {
       }}
       links={[
         {
-          key: ' Github-readme-stats++ Pro',
-          title: ' Github-readme-stats++ Pro',
-          href: 'https://pro.ant.design',
-          blankTarget: true,
-        },
-        {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
-          blankTarget: true,
-        },
-        {
-          key: ' Github-readme-stats++',
-          title: ' Github-readme-stats++',
-          href: 'https://ant.design',
+          href: 'https://github.com/AZCodingAccount/github-readme-stats-plus',
           blankTarget: true,
         },
       ]}
+      copyright="AlbertZhang 2024"
     />
   );
 };
