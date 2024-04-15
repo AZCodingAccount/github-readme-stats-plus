@@ -292,7 +292,7 @@ const App: React.FC = () => {
           </Card>
         </Col>
         {/*  卡片渲染范围 */}
-        <Col span={12} className="card">
+        <Col span={12}>
           <Card
             title="预览结果"
             extra={
@@ -315,7 +315,7 @@ const App: React.FC = () => {
             }
           >
             {isShow ? (
-              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              <ReactMarkdown rehypePlugins={[rehypeRaw]} className="card">
                 {cardType === 'githubInfo' ? markdown : markdown2}
               </ReactMarkdown>
             ) : (
