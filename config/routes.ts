@@ -10,7 +10,12 @@ export default [
   { path: '/gen_card', name: '卡片生成', icon: 'CreditCardOutlined', component: './GenCard' },
   { path: '/make_badge', name: '徽章制作', icon: 'smile', component: './MakeBadge' },
   { path: '/other', name: '第三方集成', icon: 'MoreOutlined', component: './Other' },
-  { path: '/my_gen_record', name: '我的生成记录', icon: 'UserAddOutlined', component: './Welcome' },
+  {
+    path: '/my_gen_record',
+    name: '我的生成记录',
+    icon: 'UserAddOutlined',
+    component: './MyGenRecord',
+  },
   // {
   //   path: '/admin',
   //   name: '管理页',

@@ -61,6 +61,9 @@ const App: React.FC = () => {
     setTrophy(
       `<div ><img  src="https://github-profile-trophy.vercel.app/?username=${username}&theme=gruvbox&row=1&column=5&no-frame=true&no-bg=true" /><br/></div>`,
     );
+    console.log(visitors);
+    console.log(streak_stats);
+
     setTimeout(() => {
       setSubmitting(false);
     }, 3000);

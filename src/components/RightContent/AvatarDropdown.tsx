@@ -79,7 +79,13 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
 
   // 没有登录的按钮
   const notLogin = (
-    <Button type="primary" size="middle">
+    <Button
+      onClick={() => {
+        history.push('/user/login');
+      }}
+      type="primary"
+      size="middle"
+    >
       去登录
     </Button>
   );
