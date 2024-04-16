@@ -47,9 +47,3 @@
    - profile views 徽章制作
 
 5. 第三方开源项目集成（集成优秀开源项目的基础用法）
-
-## UI 设计
-
-抄一些别人的 UI 设计
-
-![image-20240413213823564](https://my-picture-bed1-1321100201.cos.ap-beijing.myqcloud.com/mypictures/image-20240413213823564.png)
