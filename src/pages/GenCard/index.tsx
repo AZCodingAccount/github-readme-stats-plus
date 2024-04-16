@@ -363,6 +363,21 @@ const App: React.FC = () => {
           </Card>
         </Col>
       </Row>
+      <br />
+      <Row gutter={24}>
+        <Col span={24}>
+          <Card className="card">
+            本页面基于 开源项目github-readme-stats ，如需更多配置信息，请访问
+            <a
+              href="https://github.com/anuraghazra/github-readme-stats"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github README{' '}
+            </a>
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };

@@ -390,6 +390,17 @@ const App: React.FC = () => {
           </Card>
         </Col>
       </Row>
+      <br />
+      <Row gutter={24}>
+        <Col span={24}>
+          <Card className="card">
+            本页面基于开源项目shields，如需更多配置信息，请访问
+            <a href="https://shields.io/" target="_blank" rel="noopener noreferrer">
+              shields官网
+            </a>
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };

@@ -247,6 +247,14 @@ const App: React.FC = () => {
             </Card>
           </Col>
         </Row>
+        <br />
+        <Row gutter={24}>
+          <Col span={24}>
+            <Card className="card">
+              本页面基于社区开源项目，如需更多配置信息，请点击卡片左上方超链接访问开源项目官网或Github页面
+            </Card>
+          </Col>
+        </Row>
       </Space>
     </div>
   );
