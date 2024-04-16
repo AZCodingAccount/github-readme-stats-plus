@@ -162,7 +162,7 @@ const App: React.FC = () => {
                 <Form.Item label="隐藏信息" name="info" valuePropName="checked">
                   <Space>
                     <CheckboxGroup onChange={onChange} value={checkedValues}>
-                      <Checkbox value="star">Star</Checkbox>
+                      <Checkbox value="stars">Star</Checkbox>
                       <Checkbox value="commits">Commit</Checkbox>
                       <Checkbox value="prs">prs</Checkbox>
                       <Checkbox value="issues">issues</Checkbox>

@@ -30,7 +30,9 @@ const App: React.FC = () => {
     firstContent: 'github',
     lastContent: 'AZCodingAccount',
     staticColor: '#1677ff',
+    style: 'flat',
     align: 'center',
+    link: 'https://github.com/AZCodingAccount',
   };
 
   const initialDynamicValues = {
@@ -45,7 +47,7 @@ const App: React.FC = () => {
   };
 
   const [staticBadgeUrl, setStaticBadgeUrl] = useState(
-    `<img   align="center" src="https://img.shields.io/badge/github-AZCodingAccount-#1677ff"/>`,
+    `<a href="https://github.com/AZCodingAccount" target="_blank><img   align="center" src="https://img.shields.io/badge/github-AZCodingAccount-#1677ff"/></a>`,
   );
   const [dynamicBadgeUrl, setDynamicBadgeUrl] = useState(
     `<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
@@ -83,17 +85,16 @@ const App: React.FC = () => {
   //   生成静态徽章
   const onSubmit = (value: any) => {
     setSubmitting(true);
-    let { firstContent, lastContent, align } = value;
+    let { firstContent, lastContent, align, link, style } = value;
 
     // 预处理
-    console.log(hexString);
 
     hexString = hexString.replace('#', '%23');
     firstContent = firstContent.replace(' ', '_');
     lastContent = lastContent.replace(' ', '_');
 
     setStaticBadgeUrl(
-      `<img  align=${align} src="https://img.shields.io/badge/${firstContent}-${lastContent}-${hexString}"/>`,
+      `<a href="${link}" target="_blank"><img  align=${align} src="https://img.shields.io/badge/${firstContent}-${lastContent}-${hexString}?style=${style}"/></a>`,
     );
     if (lastContent === '') {
       setStaticBadgeUrl(
@@ -230,6 +231,18 @@ const App: React.FC = () => {
                 </Form.Item>
                 <Form.Item label="消息(非必填)" name="lastContent">
                   <Input placeholder="消息" />
+                </Form.Item>
+                <Form.Item label="link(非必填)" name="link">
+                  <Input placeholder="link" />
+                </Form.Item>
+                <Form.Item label="选择主题" name="style">
+                  <Radio.Group name="themeGroup">
+                    <Radio value={'flat'}>flat</Radio>
+                    <Radio value={'flat-square'}>flat-square</Radio>
+                    <Radio value={'plastic'}>plastic</Radio>
+                    <Radio value={'for-the-badge'}>for-the-badge</Radio>
+                    <Radio value={'social'}>social</Radio>
+                  </Radio.Group>
                 </Form.Item>
                 <Form.Item label="选择颜色" name="staticColor">
                   <ColorPicker showText onChange={setColorHex} value={colorHex} />
