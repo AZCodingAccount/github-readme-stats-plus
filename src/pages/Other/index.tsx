@@ -24,12 +24,12 @@ const App: React.FC = () => {
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=AZCodingAccount&theme=default&hide_border=true" />
 </picture>`);
 
-  const [wakatime, setWakaTime] =
-    useState(`[![wakatime](https://wakatime.com/badge/user/018e0793-354b-42d4-8c6d-8dba8d71ab4f.svg)](https://wakatime.com/@018e0793-354b-42d4-8c6d-8dba8d71ab4f)
-`);
+  const [wakatime, setWakaTime] = useState(
+    `<a href="https://wakatime.com/@018e0793-354b-42d4-8c6d-8dba8d71ab4f"><img align="center" src="https://wakatime.com/badge/user/018e0793-354b-42d4-8c6d-8dba8d71ab4f.svg" ></a>`,
+  );
 
   const [visitors, setVisitors] = useState(
-    `![](https://komarev.com/ghpvc/?username=AZCodingAccount&abbreviated=true)`,
+    `<a href="https://komarev.com/ghpvc/?username=AZCodingAccount&abbreviated=true" target="_blank"><img align="center" src="https://komarev.com/ghpvc/?username=AZCodingAccount&abbreviated=true"/></a>`,
   );
   const [trophy, setTrophy] = useState(
     `<div text-align="center"><img src="https://github-profile-trophy.vercel.app/?username=AZCodingAccount&theme=gruvbox&row=1&column=5&no-frame=true&no-bg=true" /><br/></div>`,
@@ -47,10 +47,12 @@ const App: React.FC = () => {
     const { username, wakatimeKey } = values;
     // 修改1
     setWakaTime(
-      `[![wakatime](https://wakatime.com/badge/user/${wakatimeKey}.svg)](https://wakatime.com/@${wakatimeKey})`,
+      `<a href="https://wakatime.com/@${wakatimeKey}"><img align="center" src="https://wakatime.com/badge/user/${wakatimeKey}.svg" ></a>`,
     );
     // 修改2
-    setVisitors(`![](https://komarev.com/ghpvc/?username=${username}&abbreviated=true)`);
+    setVisitors(
+      `<a href="https://komarev.com/ghpvc/?username=${username}&abbreviated=true" target="_blank"><img align="center" src="https://komarev.com/ghpvc/?username=${username}&abbreviated=true"/></a>`,
+    );
     // 修改3
     setStreak_stats(`<picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=dark&hide_border=true" />
@@ -216,7 +218,7 @@ const App: React.FC = () => {
             <Card
               title={
                 <a
-                  href="https://github-readme-streak-stats.herokuapp.com"
+                  href="https://github.com/ryo-ma/github-profile-trophy"
                   target="_blank"
                   rel="noreferrer"
                 >
