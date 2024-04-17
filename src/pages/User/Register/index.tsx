@@ -91,7 +91,7 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           submitter={{ searchConfig: { submitText: '注册' } }}
-          logo={<img alt="logo" src="/logo.svg" />}
+          logo={<img alt="logo" src="./logo.svg" />}
           title=" Github-readme-stats++"
           subTitle={
             <a

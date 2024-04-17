@@ -19,5 +19,5 @@
       "@@test/*": ["./src/.umi-test/*"]
     }
   },
-  "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"]
+  "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx", "src/stores/GenCardStore.js"]
 }

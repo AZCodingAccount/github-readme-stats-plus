@@ -12,6 +12,10 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
+  // exportStatic: {
+  //   // 忽略预渲染失败的错误
+  //   ignorePreRenderError: true,
+  // },
   /**
    * @name 兼容性设置
    * @description 设置 ie11 不一定完美兼容，需要检查自己使用的所有依赖
@@ -145,4 +149,12 @@ export default defineConfig({
   },
   esbuildMinifyIIFE: true,
   requestRecord: {},
+  history: {
+    type: 'hash',
+  }, // hash模式
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  favicons: [
+    'https://azcodingaccount.github.io/github-readme-stats-plus/favicon.ico',
+    './favicon.ico',
+  ],
 });

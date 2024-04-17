@@ -20,6 +20,8 @@ import rehypeRaw from 'rehype-raw';
 
 import './index.css';
 
+import { useCardStore } from '@/stores';
+
 const CheckboxGroup = Checkbox.Group;
 
 const App: React.FC = () => {
@@ -74,6 +76,7 @@ const App: React.FC = () => {
     setCheckedValues([]);
   };
 
+  const { addInfoStatus, addTopLanguage } = useCardStore();
   // Github热门信息统计卡
   const onSubmit = (value: any) => {
     setSubmitting(true);
@@ -99,6 +102,13 @@ const App: React.FC = () => {
 
     // 处理表单数据，拼接
     setMarkdown(res);
+    // 存储到本地存储中
+    addInfoStatus({
+      id: Date.now(),
+      code: res,
+      type: 'githubInfo',
+      genTime: new Date().toString(),
+    });
     // 等待时间渲染
     setTimeout(() => {
       setSubmitting(false);
@@ -126,6 +136,8 @@ const App: React.FC = () => {
         res.substring(res.length - 3);
     }
     setMarkdown2(res);
+    addTopLanguage({ id: Date.now(), code: res, type: 'topLang', genTime: new Date().toString() });
+
     // 等待时间渲染
     setTimeout(() => {
       setSubmitting(false);

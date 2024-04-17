@@ -17,7 +17,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: 'Github-readme-stats++',
   pwa: true,
-  logo: '/logo.svg',
+  logo: './logo.svg',
   iconfontUrl: '',
   token: {
     // 参见ts声明，demo 见文档，通过token 修改样式

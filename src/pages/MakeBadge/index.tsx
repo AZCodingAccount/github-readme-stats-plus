@@ -19,6 +19,8 @@ import rehypeRaw from 'rehype-raw';
 
 import './index.css';
 
+import { useBadgeStore } from '@/stores';
+
 const App: React.FC = () => {
   const [form] = Form.useForm();
 
@@ -26,7 +28,18 @@ const App: React.FC = () => {
 
   const [submitting, setSubmitting] = useState(false); // 显示加载状态
 
-  const initialValues = {
+  const {
+    updateDynamicIniValues,
+    dynamicIniValues,
+    staticIniValues,
+    updateStaticIniValues,
+    type,
+    updateType,
+    addStaticBadge,
+    addDynamicBadge,
+  } = useBadgeStore();
+
+  const initialValues = staticIniValues ?? {
     firstContent: 'github',
     lastContent: 'AZCodingAccount',
     staticColor: '#1677ff',
@@ -35,7 +48,7 @@ const App: React.FC = () => {
     link: 'https://github.com/AZCodingAccount',
   };
 
-  const initialDynamicValues = {
+  const initialDynamicValues = dynamicIniValues ?? {
     type: 'userAll',
     username: 'AZCodingAccount',
     repoName: 'iTime',
@@ -46,28 +59,15 @@ const App: React.FC = () => {
     align: 'center',
   };
 
-  const [staticBadgeUrl, setStaticBadgeUrl] = useState(
-    `<a href="https://github.com/AZCodingAccount" target="_blank><img   align="center" src="https://img.shields.io/badge/github-AZCodingAccount-#1677ff"/></a>`,
-  );
-  const [dynamicBadgeUrl, setDynamicBadgeUrl] = useState(
-    `<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
-    <img
-      align="center"
-      src="https://img.shields.io/github/stars/AZCodingAccount?style=flat"
-      style="margin: 0 5px"
-    /><img
-      align="center"
-      src="https://img.shields.io/github/followers/AZCodingAccount?style=flat"
-      style="margin: 0 5px"
-    />
-  </div>`,
-  );
+  const [staticBadgeUrl, setStaticBadgeUrl] = useState('');
+  const [dynamicBadgeUrl, setDynamicBadgeUrl] = useState('');
 
-  const [cardType, setCardType] = useState('staticBadge');
+  const [cardType, setCardType] = useState(type);
   // 更换卡片显示
   const handleSelectChange = (value: string) => {
     setIsShow(false);
     setCardType(value);
+    updateType(value);
   };
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -93,14 +93,20 @@ const App: React.FC = () => {
     firstContent = firstContent.replace(' ', '_');
     lastContent = lastContent.replace(' ', '_');
 
-    setStaticBadgeUrl(
-      `<a href="${link}" target="_blank"><img  align=${align} src="https://img.shields.io/badge/${firstContent}-${lastContent}-${hexString}?style=${style}"/></a>`,
-    );
-    if (lastContent === '') {
-      setStaticBadgeUrl(
-        `<img  align=${align} src="https://img.shields.io/badge/${firstContent}-${hexString}"/>`,
-      );
+    let res = `<a href="${link}" target="_blank"><img  align=${align} src="https://img.shields.io/badge/${firstContent}-${hexString}?style=${style}"/></a>`;
+    if (lastContent !== '') {
+      res = `<a href="${link}" target="_blank"><img  align=${align} src="https://img.shields.io/badge/${firstContent}-${lastContent}-${hexString}?style=${style}"/></a>`;
     }
+    setStaticBadgeUrl(res);
+    // 更新本地存储数据
+    updateStaticIniValues({ ...value, staticColor: hexString });
+    // 添加生成记录
+    addStaticBadge({
+      id: Date.now(),
+      code: res,
+      type: 'staticBadge',
+      genTime: new Date().toString(),
+    });
 
     setTimeout(() => {
       setSubmitting(false);
@@ -114,8 +120,6 @@ const App: React.FC = () => {
   };
   // 生成动态徽章
   const onDynamicSubmit = (value: any) => {
-    console.log(dynamicBadgeUrl);
-
     setSubmitting(true);
     setIsShow(false);
 
@@ -134,47 +138,46 @@ const App: React.FC = () => {
 
     // 处理url
 
+    let res = '';
     if (value?.type === 'repoAll') {
       // 生成仓库全部
-      setDynamicBadgeUrl(`<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
-        <img
-          align=${value?.align}
-          src="https://img.shields.io/github/stars/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
-          style="margin: 0 5px"
-        /><img
-          align=${value?.align}
-          src="https://img.shields.io/github/watchers/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}""
-          style="margin: 0 5px"
-        />
-        <img
-          align=${value?.align}
-          src="https://img.shields.io/github/forks/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
-          style="margin: 0 5px"
-        />
-      </div>`);
+      res = `<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
+      <img
+        align=${value?.align}
+        src="https://img.shields.io/github/stars/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
+        style="margin: 0 5px"
+      /><img
+        align=${value?.align}
+        src="https://img.shields.io/github/watchers/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}""
+        style="margin: 0 5px"
+      />
+      <img
+        align=${value?.align}
+        src="https://img.shields.io/github/forks/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
+        style="margin: 0 5px"
+      />
+    </div>`;
     } else if (value?.type !== 'userAll') {
-      console.log(value.align);
-
       // 普通的生成url
       if (value?.type === 'stars' || value?.type === 'followers') {
         // 有关用户的
-        setDynamicBadgeUrl(` <img
+        res = `<img
             align=${value?.align}
             src="https://img.shields.io/github/${value?.type}/${value?.username}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
             style="margin: 0 5px"
-          />`);
+          />`;
       } else {
         // 生成仓库的
         // 处理type
         const type = value?.type.replace('repo', '').toLowerCase();
-        setDynamicBadgeUrl(` <img
+        res = `<img
           align=${value?.align}
           src="https://img.shields.io/github/${type}/${value?.username}/${value?.repoName}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
           style="margin: 0 5px"
-        />`);
+        />`;
       }
     } else {
-      setDynamicBadgeUrl(`<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
+      res = `<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
         <img
           align=${value?.align}
           src="https://img.shields.io/github/stars/${value?.username}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}"
@@ -184,8 +187,18 @@ const App: React.FC = () => {
           src="https://img.shields.io/github/followers/${value?.username}?style=${value?.style}&logoColor=${value?.logoColor}&labelColor=${value?.labelColor}&color=${value?.color}""
           style="margin: 0 5px"
         />
-      </div>`);
+      </div>`;
     }
+    setDynamicBadgeUrl(res);
+    // 更新本地存储数据
+    updateDynamicIniValues(value);
+    // 添加生成记录
+    addDynamicBadge({
+      id: Date.now(),
+      code: res,
+      type: 'dynamicBadge',
+      genTime: new Date().toString(),
+    });
     setTimeout(() => {
       setSubmitting(false);
       setIsShow(true);
@@ -208,7 +221,7 @@ const App: React.FC = () => {
             title="输入配置"
             extra={
               <Select
-                defaultValue="staticBadge"
+                defaultValue={type}
                 style={{ width: 200 }}
                 onChange={handleSelectChange}
                 options={[
