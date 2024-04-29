@@ -59,3 +59,6 @@
    - profile views 徽章制作
 
 5. 第三方开源项目集成（集成优秀开源项目的基础用法）
+
+## 最后
+欢迎[PR](https://github.com/AZCodingAccount/github-readme-stats-plus/pulls)、[issue](https://github.com/AZCodingAccount/github-readme-stats-plus/issues)。
