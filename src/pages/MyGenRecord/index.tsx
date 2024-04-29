@@ -137,7 +137,7 @@ const App: React.FC = () => {
                 <EditOutlined
                   key="edit"
                   onClick={() => {
-                    messageApi.error('功能尚未推出，请等待');
+                    messageApi.error('功能尚未推出，请期待');
                   }}
                 />,
                 <DeleteOutlined

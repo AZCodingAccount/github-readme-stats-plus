@@ -409,8 +409,17 @@ const App: React.FC = () => {
           <Card className="card">
             本页面基于开源项目shields，如需更多配置信息，请访问
             <a href="https://shields.io/" target="_blank" rel="noopener noreferrer">
-              shields官网
+              shields官网，
             </a>
+            您也可以访问
+            <a
+              href="https://dev.to/envoy_/150-badges-for-github-pnk#skills"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              150+ Badges for GitHub
+            </a>
+            获取shields官方预设的静态徽章
           </Card>
         </Col>
       </Row>
