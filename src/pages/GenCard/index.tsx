@@ -88,9 +88,15 @@ const App: React.FC = () => {
       value?.align
     }" src="https://github-readme-stats.vercel.app/api?username=${value?.username}&locale=${
       value?.language
-    }&line_height=33&show_icons=${value?.icon}&hide=${checkedValues.join(',')}&theme=${
-      value?.theme
-    }&rank_icon=${value?.rank_icon}"/>`;
+    }&line_height=33&show_icons=${value?.icon}&hide=${checkedValues.join(',')}&rank_icon=${
+      value?.rank_icon
+    }"/>`;
+
+    // 拼接主题（plain 主题不传 theme，传空的 theme= 会让接口返回 500）
+    if (value?.theme) {
+      res =
+        res.substring(0, res.length - 3) + `&theme=${value?.theme}` + res.substring(res.length - 3);
+    }
 
     // 拼接自定义标题
     if (value?.custom_title !== '') {
@@ -120,7 +126,12 @@ const App: React.FC = () => {
   const onLanguageSubmit = (value: any) => {
     setSubmitting(true);
     // 处理表单数据，拼接
-    let res = `<img   align="${value?.align}" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${value?.username}&locale=${value?.language}&line_height=33&theme=${value?.theme}&langs_count=${value?.langs_count}"/>`;
+    let res = `<img   align="${value?.align}" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${value?.username}&locale=${value?.language}&line_height=33&langs_count=${value?.langs_count}"/>`;
+    // 拼接主题（plain 主题不传 theme，传空的 theme= 会让接口返回 500）
+    if (value?.theme) {
+      res =
+        res.substring(0, res.length - 3) + `&theme=${value?.theme}` + res.substring(res.length - 3);
+    }
     // 拼接布局
     if (value?.layout !== '') {
       res =
